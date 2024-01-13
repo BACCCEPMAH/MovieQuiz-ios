@@ -53,7 +53,6 @@ final class MovieQuizViewController: UIViewController {
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
         }
-   
     private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             correctAnswers += 1
@@ -61,6 +60,7 @@ final class MovieQuizViewController: UIViewController {
             imageView.layer.masksToBounds = true
             imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
+
             imageView.layer.cornerRadius = 20
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.showNextQuestionOrResults()
@@ -68,20 +68,24 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     
+
     private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(title: result.title,
                                       message: result.text,
                                       preferredStyle: .alert)
+
         let action = UIAlertAction(title: result.buttonText, style: .default) { _ in
             self.currentQuestionIndex = 0
             self.correctAnswers = 0
+
             let firstQuestion = self.questions[self.currentQuestionIndex]
             self.show(quiz: self.convert(model: firstQuestion))
         }
         alert.addAction(action)
+
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questions.count - 1 {
             
@@ -90,6 +94,7 @@ final class MovieQuizViewController: UIViewController {
                                                  title: "Этот раунд окончен!",
                                                  buttonText: "Сыграть ещё раз?")
             show(quiz: viewModel)
+
         } else {
             currentQuestionIndex += 1
             show(quiz: convert(model: questions[currentQuestionIndex]))
@@ -98,9 +103,14 @@ final class MovieQuizViewController: UIViewController {
 
 }
 
+
+}
+
 private struct QuizQuestion {
     let image: String
+
     let text: String
+
     let correctAnswer: Bool
 }
 
