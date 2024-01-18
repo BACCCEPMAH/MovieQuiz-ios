@@ -53,6 +53,7 @@ final class MovieQuizViewController: UIViewController {
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
         }
+   
     private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             correctAnswers += 1
@@ -85,7 +86,7 @@ final class MovieQuizViewController: UIViewController {
 
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questions.count - 1 {
             
@@ -103,8 +104,6 @@ final class MovieQuizViewController: UIViewController {
 
 }
 
-
-}
 
 private struct QuizQuestion {
     let image: String
